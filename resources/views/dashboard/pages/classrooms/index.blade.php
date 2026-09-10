@@ -10,7 +10,7 @@
                     <div class="col-sm-6">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Classrooms</li>
                             </ol>
                         </nav>
@@ -34,7 +34,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <p class="text-secondary small mb-1">Student</p>
-                                <h3 class="mb-0 fw-bold text-success">3</h3>
+                                <h3 class="mb-0 fw-bold text-success">50</h3>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <p class="text-secondary small mb-1">Teachers</p>
-                                <h3 class="mb-0 fw-bold text-warning">2</h3>
+                                <h3 class="mb-0 fw-bold text-warning">5</h3>
                             </div>
                         </div>
                     </div>
@@ -101,40 +101,68 @@
                                 <div class="table-responsive">
 
 
-                                    <table class="table align-middle mb-0">
+                                    <table class="table align-middle mb-0" style="text-align:center;">
                                         <thead>
                                             <tr>
+                                                <th>id</th>
                                                 <th>Name</th>
                                                 <th>Description</th>
+                                                <th>Teachers count</th>
+                                                <th>Students count</th>
                                                 <th>Capacity</th>
                                                 <th>Due</th>
-                                                <th class="text-end">Actions</th>
+                                                <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($classrooms as $item)
                                                 <tr>
+                                                    <td class="col-id">
+                                                        {{ $item->id }}
+                                                    </td>
                                                     <td>
                                                         <a href="#" class="fw-semibold text-decoration-none">
                                                             {{ $item->name }}
                                                         </a>
-                                                        <div class="small text-secondary">Internal</div>
+
                                                     </td>
                                                     <td class="fw-semibold text-decoration-none">
                                                         {{ $item->description }}
                                                     </td>
+                                                    <td class="fw-semibold text-decoration-none">
+                                                        {{ $item->teachers_count }}
+                                                    </td>
+                                                    <td class="fw-semibold text-decoration-none">
+                                                        {{ $item->students_count }}
+                                                    </td>
+
 
 
                                                     <td class="text-nowrap">{{ $item->capacity }}</td>
-                                                    <td class="text-nowrap">{{ $item->created_at }}</td>
+                                                    <td class="text-nowrap">{{ $item->created_at?->format('Y-m-d') }}</td>
 
-                                                    <td class="text-end">
+                                                    <td class="text-center">
                                                         <div class="btn-group btn-group-sm">
+                                                            <a href="{{ route('dashboard.classrooms.teachers', $item) }}">
+                                                                <button class="btn btn-outline-secondary" type="button"
+                                                                    title="Teachers">
+                                                                    <i class="bi bi-person-workspace"
+                                                                        aria-hidden="true"></i>
+                                                                </button>
+                                                            </a>
+                                                            <a href="{{ route('dashboard.classrooms.students', $item) }}">
+                                                                <button class="btn btn-outline-secondary" type="button"
+                                                                    title="Students">
+                                                                    <i class="bi bi-people" aria-hidden="true"></i>
+                                                                </button>
+                                                            </a>
                                                             <a href="{{ route('dashboard.classrooms.show', $item) }}">
                                                                 <button class="btn btn-outline-secondary" type="button"
                                                                     title="Show">
                                                                     <i class="bi bi-eye" aria-hidden="true"></i>
-                                                                </button></a>
+                                                                </button>
+                                                            </a>
+
                                                             <a href="{{ route('dashboard.classrooms.edit', $item) }}">
                                                                 <button class="btn btn-outline-secondary" type="button"
                                                                     title="Edit">
@@ -158,19 +186,21 @@
                                         </tbody>
                                     </table>
                                     <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <small class="text-secondary"> Showing 6 of 6 </small>
+                                        <small class="text-secondary">  </small>
+
                                         <nav aria-label="Pagination">
-                                            <ul class="pagination pagination-sm mb-0">
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#">Previous</a>
-                                                </li>
-                                                <li class="page-item active">
-                                                    <a class="page-link" href="#">1</a>
-                                                </li>
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#">Next</a>
-                                                </li>
-                                            </ul>
+                                             <ul class="pagination pagination-sm mb-0">
+                                                    <li class="page-item disabled">
+                                                        <a class="page-link" href="#">Previous</a>
+                                                    </li>
+                                                    <li class="page-item active">
+                                                        <a class="page-link" href="#">1</a>
+                                                    </li>
+                                                    <li class="page-item disabled">
+                                                        <a class="page-link" href="#">Next</a>
+                                                    </li>
+                                                </ul>
+
                                         </nav>
                                     </div>
                                 </div>
@@ -180,13 +210,11 @@
                 </div>
 
     </main>
-
-
 @endsection
- @push('scripts')
-        <script>
-            document.getElementById('resetBtn').addEventListener('click', function() {
-                window.location.href = '{{ route('dashboard.classrooms.index') }}';
-            });
-        </script>
-    @endpush
+@push('scripts')
+    <script>
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            window.location.href = '{{ route('dashboard.classrooms.index') }}';
+        });
+    </script>
+@endpush

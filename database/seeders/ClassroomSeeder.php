@@ -16,17 +16,17 @@ class ClassroomSeeder extends Seeder
         //
         Classroom::create([
             'name'=> 'A',
-            'description'=>'no desc',
+            'description'=>'no description',
             'capacity'=>30
         ]);
         Classroom::create([
             'name'=> 'B',
-            'description'=>'no desc',
+            'description'=>'no description',
             'capacity'=>35
         ]);
         Classroom::create([
             'name'=> 'C',
-            'description'=>'no desc',
+            'description'=>'no description',
             'capacity'=>20
         ]);
     }

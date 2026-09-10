@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             [
                 UserSeeder::class,
                 ClassroomSeeder::class,
+                TeacherSeeder::class,
+                StudentSeeder::class,
 
             ]
         );

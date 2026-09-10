@@ -19,7 +19,7 @@
     @enderror
     "
     name="{{ $name }}"
-    value="{{ $value }}"
+    value="{{ old($name,$value) }}"
     placeholder="{{ $placeholder }}"
 >
 @error($name)

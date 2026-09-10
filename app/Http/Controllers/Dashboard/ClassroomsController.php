@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Classroom;
+use App\Models\Teacher;
 
 class ClassroomsController extends Controller
 {
@@ -18,7 +19,7 @@ class ClassroomsController extends Controller
             {
                 $query->where('name', 'like', "%$name%");
             }
-        return view('dashboard.pages.classrooms.index', ['classrooms'=>$query->paginate(5)]);
+        return view('dashboard.pages.classrooms.index', ['classrooms'=>$query->withCount(['students', 'teachers'])->paginate(10)]);
     }
 
     public function create()
@@ -30,7 +31,7 @@ class ClassroomsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'min:1'],
+            'name' => ['required', 'min:1','unique:classrooms,name,except,id'],
             'description'=>['nullable', 'max:255'],
             'capacity'=> ['numeric', 'min:1']
         ]);
@@ -69,4 +70,20 @@ class ClassroomsController extends Controller
         $classroom->delete();
         return redirect()->route('dashboard.classrooms.index')->with('success','Class deleted successfully!');
     }
+
+    public function teachers(Classroom $classroom)
+    {
+        return view('dashboard.pages.classrooms.teachers', [
+            'classroom'=>$classroom,
+            'teachers'=>$classroom->teachers()->paginate(10)
+            ]);
+    }
+    public function students(Classroom $classroom)
+    {
+        return view('dashboard.pages.classrooms.students', [
+            'classroom'=>$classroom,
+            'students'=>$classroom->students()->paginate(10)
+            ]);
+    }
+
 }

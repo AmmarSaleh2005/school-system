@@ -8,8 +8,6 @@
 </div>
 
 <div class="mb-3">
-
-
     <x-form.input type="numeric" class="form-control" name="capacity" value="{{ $classroom->capacity }}"
         label="Capacity" placeholder="Enter number" />
 </div>
