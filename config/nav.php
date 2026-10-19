@@ -20,4 +20,9 @@ return [
         'icon'  => 'bi bi-people',
         'route' => 'dashboard.students.index'
     ],
+    [
+        'title' => 'Two factor authenticatable',
+        'icon'  => 'bi bi-lock',
+        'route' => 'dashboard.admin.2fa'
+    ],
 ];

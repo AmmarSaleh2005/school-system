@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\ClassroomsController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\StudentsController;
 use App\Http\Controllers\Dashboard\TeachersController;
+use App\Http\Controllers\Dashboard\TwoFactorAuthenticatableController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +14,7 @@ Route::group(
     [
         'prefix' => '/admin/dashboard',
         'as' => 'dashboard.',
-        'middleware' => ['auth']
+        'middleware' => ['auth:admin']
     ],
     function () {
         Route::get('/index', [DashboardController::class, 'index'])->name('index');
@@ -26,6 +27,7 @@ Route::group(
         Route::put('/classrooms/{classroom}/update', [ClassroomsController::class, 'update'])->name('classrooms.update');
         Route::get('/classrooms/{classroom}/teachers', [ClassroomsController::class, 'teachers'])->name('classrooms.teachers');
         Route::get('/classrooms/{classroom}/students', [ClassroomsController::class, 'students'])->name('classrooms.students');
+        Route::get('/2fa', [TwoFactorAuthenticatableController::class, 'index'])->name('admin.2fa');
 
         Route::resource('teachers', TeachersController::class);
         Route::resource('students', StudentsController::class);

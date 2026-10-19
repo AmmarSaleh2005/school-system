@@ -344,7 +344,7 @@
                 <nav class="mt-2" aria-label="Main navigation">
                     <!--begin::Sidebar Menu-->
 
-                    <x-nav />
+                    <x-nav/>
 
 
                     <!--end::Sidebar Menu-->
