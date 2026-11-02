@@ -1,9 +1,15 @@
 <?php
 
 use App\Http\Controllers\Dashboard\ClassroomsController;
+use App\Http\Controllers\Dashboard\CurriculaController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\GradeLevelsController;
+use App\Http\Controllers\Dashboard\Hr\HrController;
+use App\Http\Controllers\Dashboard\Hr\HrDepartmentsController;
 use App\Http\Controllers\Dashboard\StudentsController;
+use App\Http\Controllers\Dashboard\SubjectsController;
 use App\Http\Controllers\Dashboard\TeachersController;
+use App\Http\Controllers\Dashboard\TracksController;
 use App\Http\Controllers\Dashboard\TwoFactorAuthenticatableController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +37,15 @@ Route::group(
 
         Route::resource('teachers', TeachersController::class);
         Route::resource('students', StudentsController::class);
+        Route::resource('tracks', TracksController::class);
+        Route::resource('subjects', SubjectsController::class);
+        Route::resource('gradelevels', GradeLevelsController::class);
+        Route::resource('curricula', CurriculaController::class);
+        Route::get('/curricula/{curriculum}/subjects', [CurriculaController::class, 'subjects'])->name('curricula.subjects');
+       //HR
+        Route::prefix('hr')->as('hr.')->group(function () {
+            Route::get('/', [HrController::class, 'index'])->name('index');
+            Route::resource('departments', HrDepartmentsController::class);
+        });
     }
 );

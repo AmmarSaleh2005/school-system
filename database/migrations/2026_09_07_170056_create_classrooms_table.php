@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name')->unique('name');
             $table->text('description')->nullable();
             $table->integer('capacity')->default(30);
+
+            
+
             $table->timestamps();
         });
     }

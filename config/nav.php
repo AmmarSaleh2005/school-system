@@ -25,4 +25,29 @@ return [
         'icon'  => 'bi bi-lock',
         'route' => 'dashboard.admin.2fa'
     ],
+    [
+        'title' => 'Tracks',
+        'icon'  => 'bi bi-diagram-3',
+        'route' => 'dashboard.tracks.index'
+    ],
+    [
+        'title' => 'Subjects',
+        'icon'  => 'bi bi-book',
+        'route' => 'dashboard.subjects.index'
+    ],
+    [
+        'title' => 'Gradelevels',
+        'icon'  => 'bi bi-layers',
+        'route' => 'dashboard.gradelevels.index'
+    ],
+    [
+        'title' => 'Curricula',
+        'icon'  => 'bi bi-journal',
+        'route' => 'dashboard.curricula.index'
+    ],
+    [
+        'title' => 'Human resources',
+        'icon'  => 'bi bi-people',
+        'route' => 'dashboard.hr.index'
+    ],
 ];

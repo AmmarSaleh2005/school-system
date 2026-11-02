@@ -110,6 +110,9 @@
                                                 <th>Teachers count</th>
                                                 <th>Students count</th>
                                                 <th>Capacity</th>
+                                                <th>Curriculum</th>
+                                                <th>Grade level</th>
+                                                <th>Track</th>
                                                 <th>Due</th>
                                                 <th class="text-center">Actions</th>
                                             </tr>
@@ -135,10 +138,14 @@
                                                     <td class="fw-semibold text-decoration-none">
                                                         {{ $item->students_count }}
                                                     </td>
+                                                     <td class="text-nowrap">{{ $item->capacity }}</td>
+                                                    <td>{{ $item->curriculum->name??'-' }}</td>
+                                                    <td>{{ $item->gradelevel->name??'-' }}</td>
+                                                    <td>{{ $item->track->name ?? 'none' }}</td>
 
 
 
-                                                    <td class="text-nowrap">{{ $item->capacity }}</td>
+
                                                     <td class="text-nowrap">{{ $item->created_at?->format('Y-m-d') }}</td>
 
                                                     <td class="text-center">
